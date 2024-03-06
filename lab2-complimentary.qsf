@@ -1,0 +1,8 @@
+library IEEE;use IEEE.STD_LOGIC_1164.ALL;
+entity Davud_Muradli is
+    Port (        input1 : in STD_LOGIC_VECTOR(4 downto 0); 
+        input2 : in STD_LOGIC_VECTOR(4 downto 0);         output : out STD_LOGIC_VECTOR(9 downto 0) 
+    );end Davud_Muradli;
+architecture Behavior of Davud_Muradli is
+begin    output <= input1 & input2;
+end Behavior;
