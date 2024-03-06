@@ -1,0 +1,23 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity Davud_Muradli_Lab2 is
+    Port ( i_bit0 : in  STD_LOGIC;  -- Single-bit inputs
+           i_bit1 : in  STD_LOGIC;
+           i_bit2 : in  STD_LOGIC;
+           i_bit3 : in  STD_LOGIC;
+           o_bit0 : out STD_LOGIC); -- Single-bit output
+end Davud_Muradli_Lab2;
+
+architecture behave of Davud_Muradli_Lab2 is
+    signal and1_out, and2_out: STD_LOGIC; -- Intermediate signals for AND gate outputs
+begin
+    -- First AND gate
+    and1_out <= i_bit0 and i_bit1;
+    
+    -- Second AND gate
+    and2_out <= i_bit2 and i_bit3;
+    
+    -- NAND gate with the outputs of the two AND gates
+    o_bit0 <= not (and1_out and and2_out);
+end behave;
