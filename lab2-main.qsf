@@ -1,0 +1,27 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity Davud_Muradli is
+    Port ( 
+        input_vector : in STD_LOGIC_VECTOR(3 downto 0); -- 4-bit input vector
+        o_bit0 : out STD_LOGIC; -- Output for the final gate operation
+        probe_and1 : out STD_LOGIC; -- Probe output for the first AND gate
+        probe_and2 : out STD_LOGIC; -- Probe output for the second AND gate
+        probe_nand : out STD_LOGIC -- Probe output for the NAND gate
+    ); 
+end Davud_Muradli;
+
+architecture behave of Davud_Muradli is
+begin
+    -- AND operation using the first two bits of the input vector
+    probe_and1 <= input_vector(3) and input_vector(2);
+
+    -- AND operation using the next two bits of the input vector
+    probe_and2 <= input_vector(1) and input_vector(0);
+
+    -- NAND operation with the outputs of the two AND gates
+    probe_nand <= not (probe_and1 and probe_and2);
+
+    -- Assuming o_bit0 should reflect the output of the NAND operation
+    o_bit0 <= probe_nand; -- Assign the NAND operation result to the output
+end behave;
