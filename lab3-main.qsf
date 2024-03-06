@@ -1,0 +1,30 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity Davud_Muradli is
+    Port ( 
+        input_vector : in STD_LOGIC_VECTOR(3 downto 0);
+        o_vector : out STD_LOGIC_VECTOR(6 downto 0) -- 7-bit output vector for 7-segment display
+    );
+end Davud_Muradli;
+
+architecture behave of Davud_Muradli is
+    signal and1_out, and2_out, result: STD_LOGIC;
+begin
+    and1_out <= input_vector(3) and input_vector(2);
+    and2_out <= input_vector(1) and input_vector(0);
+    result <= and1_out and and2_out; -- Result of AND operation
+
+    -- Logic for displaying '0' or '1' on a 7-segment display
+    o_vector(0) <= not result; -- Segment g: '0' turns the segment on (common anode), '1' turns off.
+    o_vector(1) <= result;     -- All other segments are controlled based on the result
+    o_vector(2) <= result;     -- to display '0' (when result is true) or '1' (when result is false).
+    o_vector(3) <= result;
+    o_vector(4) <= not result; -- For '1', only b and c segments should be on; hence, these are '0' when result is false.
+    o_vector(5) <= not result;
+    o_vector(6) <= result;
+
+    -- This setup will:
+    -- Display '0' when the AND operation result is true (positive), all segments except g are on (segments are '0').
+    -- Display '1' when the AND operation result is false (negative), only b and c segments are on (segments are '0').
+end behave;
